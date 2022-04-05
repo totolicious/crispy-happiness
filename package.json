@@ -1,0 +1,8 @@
+{
+  "name": "crispy-happiness",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/totolicious/crispy-happiness.git",
+  "author": "Gabriel Totoliciu <gabriel@totoliciu.ro>",
+  "license": "MIT"
+}
