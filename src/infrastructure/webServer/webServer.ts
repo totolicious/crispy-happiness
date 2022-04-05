@@ -16,11 +16,21 @@ export class WebServer {
         this.logger = logger;
     }
 
-    public start() {
-        this.server.listen(this.config.port, () => {
-            this.logger.info(`Listening on port '${this.config.port}'`);
-        }).on('error', (e: Error) => {
-            this.logger.error('Error listening: ', e)
-        });
+    /**
+     * Attempts to start the web server and waits for the web server successfully start or fail starting
+     */
+    public async start(): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.server.listen(this.config.port, () => {
+                this.logger.debug(`Starting web server on port '${this.config.port}'`);
+            }).on('error', (e: Error) => {
+                this.logger.error('Error listening: ', e);
+                reject(e);
+            }).on('listening', () => {
+                this.logger.info(`Web server listening on port '${this.config.port}`);
+                resolve();
+            });
+        })
     }
 }
+

@@ -1,7 +1,13 @@
 import {Logger, WebServer} from "./infrastructure";
 import {config} from "./config";
 
-const logger = new Logger(config.logger);
+const init = async () => {
+    const logger = new Logger(config.logger);
 
-const webServer = new WebServer({ port: 9000, logger });
-webServer.start();
+    const webServer = new WebServer({ config: config.webServer, logger });
+    await webServer.start();
+
+
+}
+
+void init();
