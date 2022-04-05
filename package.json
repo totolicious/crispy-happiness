@@ -6,7 +6,7 @@
   "author": "Gabriel Totoliciu <gabriel@totoliciu.ro>",
   "license": "MIT",
   "scripts": {
-    "start-dev": "ts-node-dev --respawn --transpile-only --project ./tsconfig.json src/app.ts"
+    "start-dev": "ts-node-dev --respawn --project ./tsconfig.json src/app.ts"
   },
   "devDependencies": {
     "@tsconfig/node16": "^1.0.2",
