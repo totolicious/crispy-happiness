@@ -4,5 +4,13 @@
   "main": "index.js",
   "repository": "https://github.com/totolicious/crispy-happiness.git",
   "author": "Gabriel Totoliciu <gabriel@totoliciu.ro>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "start-dev": "ts-node-dev --respawn --transpile-only src/app.ts"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.6.3"
+  },
+  "dependencies": {}
 }
