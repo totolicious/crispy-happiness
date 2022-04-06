@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 import {ValidationError} from "../../../../../utils";
 import {pick} from "lodash";
+import {Transaction} from "../../../../../domains";
 
 // TODO: this really needs to be moved to a generic types directory and included in tsconfig
 declare module "yup" {
@@ -14,12 +15,7 @@ type ValidateTransactionInputReturnType = {
     transaction: null
 } | {
     error: null
-    transaction: {
-        date: string;
-        amount: number;
-        currency: string;
-        client_id: number;
-    }
+    transaction: Transaction;
 }
 
 export const validateTransactionInput = async (data: any): Promise<ValidateTransactionInputReturnType> => {
@@ -37,16 +33,22 @@ export const validateTransactionInput = async (data: any): Promise<ValidateTrans
             .required("The 'client_id' property is required")
     });
 
-    let transaction;
+    let validatedTransaction;
 
     try {
-        transaction = await schema.validate(data);
+        validatedTransaction = await schema.validate(data);
     } catch (e) {
         return {
             error: pick(e, ['name', 'message']) as ValidationError,
             transaction: null
         }
     }
+
+    const transaction = new Transaction();
+    transaction.date = validatedTransaction.date;
+    transaction.currency = validatedTransaction.currency;
+    transaction.amount = validatedTransaction.amount;
+    transaction.clientId = validatedTransaction.client_id;
 
     return {error: null, transaction};
 }
