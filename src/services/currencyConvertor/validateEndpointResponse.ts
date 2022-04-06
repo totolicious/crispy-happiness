@@ -3,8 +3,6 @@ import {Currency} from "../../domains";
 import {mapValues} from "lodash";
 
 export const validateEndpointResponse = async (data: any) => {
-    console.log(data);
-
     const schema = Yup.object().required().shape({
         success: Yup.boolean().required().oneOf([true]).required(),
         base: Yup.string().required().oneOf([Currency.EUR]),
