@@ -1,3 +1,1 @@
-export interface ValidationResult {
-    error: null | { name: string, message: string }
-}
+export type ValidationError = { name: string, message: string };

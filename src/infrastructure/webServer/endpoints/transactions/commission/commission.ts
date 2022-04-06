@@ -1,45 +1,52 @@
 import {Router} from "express";
 import { Logger } from "../../../../logger";
 import {validateTransactionInput} from "./validateTransactionInput";
-import {Client} from "../../../../../domains";
 import {DataSource} from "typeorm";
+import {calculateCommission} from "../../../../../domains";
+import {CurrencyConvertor} from "../../../../../services";
 
 export interface TransactionsRouterConfig {
     logger: Logger;
     dataSource: DataSource;
+    currencyConvertor: CurrencyConvertor;
 }
 
-export const getTransactionsRouter = ({ logger, dataSource }: TransactionsRouterConfig) => {
+export const getTransactionsRouter = ({ logger, dataSource, currencyConvertor }: TransactionsRouterConfig) => {
   const router = Router();
 
   router.post('/transactions/commission', async (req, res) => {
-      const transaction = req.body;
-      const { error } = await validateTransactionInput(transaction);
+      // TODO: could be moved somewhere more generic
+      const sendBadInputResponse = (error: Error) => {
+          logger.debug(error);
+          res.status(400);
+          res.json({ error, commission: null });
+          res.send();
+      }
+
+      const input = req.body;
+
+      // input validation
+      const { error, transaction } = await validateTransactionInput(input);
 
       if (error) {
-          res.status(400);
-          res.json({ error });
-          res.send();
+          sendBadInputResponse(error);
           return;
       }
 
-      const client = await dataSource.getRepository(Client)
-          .findOneBy({ id: transaction.client_id });
+      // commission calculation
+      const response = await calculateCommission({
+          dataSource,
+          transaction,
+          currencyConvertor,
+      });
 
-      if (!client) {
-          const error = {
-              name: 'DataError',
-              message: 'Client does not exist'
-          };
-          logger.debug(error);
-          res.status(400);
-          res.json({ error });
-          res.send();
+      if (response.error) {
+          sendBadInputResponse(response.error);
           return;
       }
 
       res.status(200);
-      res.json({})
+      res.json({ error: null, commission: response.commission })
       res.send();
   });
 
