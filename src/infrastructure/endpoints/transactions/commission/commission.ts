@@ -1,4 +1,3 @@
-
 import {Router} from "express";
 import { Logger } from "../../../logger";
 import {validateTransactionInput} from "./validateTransactionInput";
@@ -17,6 +16,16 @@ export const getTransactionsRouter = ({ logger, dataSource }: TransactionsRouter
       const transaction = req.body;
       const { error } = await validateTransactionInput(transaction);
 
+      if (error) {
+          res.status(400);
+          res.json({ error });
+          res.send();
+          return;
+      }
+
+      // TODO: trigger error intentionally
+      (process.env as any)();
+
       const client = await dataSource.getRepository(Client)
           .findOneBy({ id: transaction.client_id });
 
@@ -26,13 +35,6 @@ export const getTransactionsRouter = ({ logger, dataSource }: TransactionsRouter
               message: 'Client does not exist'
           };
           logger.debug(error);
-          res.status(400);
-          res.json({ error });
-          res.send();
-          return;
-      }
-
-      if (error) {
           res.status(400);
           res.json({ error });
           res.send();
