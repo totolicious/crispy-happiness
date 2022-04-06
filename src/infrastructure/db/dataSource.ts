@@ -12,7 +12,7 @@ export interface InitDBConfig {
 export const initDb = async ({
      logger,
      dataSourceOptions,
-}: InitDBConfig) => {
+}: InitDBConfig): Promise<DataSource> => {
     const AppDataSource = new DataSource({
         ...dataSourceOptions,
         entities: [Client, Transaction],
@@ -28,4 +28,6 @@ export const initDb = async ({
     }
 
     logger.info("Connected to database");
+
+    return AppDataSource;
 }
