@@ -29,7 +29,7 @@ export class WebServer {
                 this.logger.error('Error listening: ', e);
                 reject(e);
             }).on('listening', () => {
-                this.logger.info(`Web server listening on port '${this.config.port}`);
+                this.logger.info(`Web server listening on port '${this.config.port}'`);
                 resolve();
             });
         })
