@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 import { mapValues } from "lodash";
-import { Currency } from "../../domains/Currency";
+import { Currency } from "../../domains/currency";
 
 export const validateEndpointResponse = async (data: any) => {
   const schema = Yup.object()

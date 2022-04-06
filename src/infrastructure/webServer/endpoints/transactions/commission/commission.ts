@@ -5,6 +5,7 @@ import { validateTransactionInput } from "./validateTransactionInput";
 import { calculateCommission } from "../../../../../domains";
 import { CurrencyConvertor } from "../../../../../services";
 import { AsyncError } from "../../../../../utils";
+import { storeTransactionInEur } from "../../../../../domains/transaction/storeTransactionInEur";
 
 export interface TransactionsRouterConfig {
   logger: Logger;
@@ -50,7 +51,8 @@ export const getTransactionsRouter = ({
       return;
     }
 
-    // TODO: store the transaction in EUR
+    // store the transaction
+    await storeTransactionInEur({transaction, dataSource, currencyConvertor});
 
     res.status(200);
     res.json({ error: null, commission: response.commission });

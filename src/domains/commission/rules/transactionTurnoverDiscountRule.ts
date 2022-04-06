@@ -42,6 +42,6 @@ export const transactionTurnoverDiscountRule = async ({
 
   // if the total monthly transactions amount passes the threshold, return the preferential total turnover discount
   return totalAmountInEur >= ruleConfig.monthlyAmountEurThreshold
-    ? ruleConfig.monthlyAmountEurThreshold
+    ? ruleConfig.commissionInEur
     : null;
 };

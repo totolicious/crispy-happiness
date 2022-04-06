@@ -31,7 +31,7 @@ export const defaultPercentageRule = async ({
   // minimum amount allowed
   commissionAmountInEur = Math.max(
     commissionAmountInEur,
-    ruleConfig.minimumAllowedComissionInEur
+    ruleConfig.minimumAllowedCommissionInEur
   );
 
   return commissionAmountInEur;

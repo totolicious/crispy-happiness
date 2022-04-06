@@ -36,10 +36,11 @@ export const config: {
   commissions: {
     defaultPercentage: {
       percentage: 0.5,
-      minimumAllowedComissionInEur: 0.05,
+      minimumAllowedCommissionInEur: 0.05,
     },
     transactionTurnoverDiscount: {
       monthlyAmountEurThreshold: 1000,
+      commissionInEur: 0.3,
     },
   },
 };

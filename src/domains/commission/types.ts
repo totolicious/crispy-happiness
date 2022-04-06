@@ -1,9 +1,10 @@
 export interface CommissionConfig {
   defaultPercentage: {
     percentage: number;
-    minimumAllowedComissionInEur: number;
+    minimumAllowedCommissionInEur: number;
   };
   transactionTurnoverDiscount: {
     monthlyAmountEurThreshold: number;
+    commissionInEur: number;
   };
 }

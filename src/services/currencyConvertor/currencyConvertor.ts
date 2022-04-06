@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 import { validateEndpointResponse } from "./validateEndpointResponse";
-import { Currency } from "../../domains/Currency";
+import { Currency } from "../../domains/currency";
 import { CurrencyConvertorConfig } from "./types";
 
 export class CurrencyConvertor {
