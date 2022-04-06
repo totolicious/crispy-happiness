@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import {ValidationResult} from "../../../../utils";
+import {ValidationResult} from "../../../../../utils";
 import {pick} from "lodash";
 
 // TODO: this really needs to be moved to a generic types directory and included in tsconfig
@@ -31,6 +31,4 @@ export const validateTransactionInput = async (transaction: any): Promise<Valida
             error: pick(e, ['name', 'message'])
         } as ValidationResult
     }
-
-
 }
