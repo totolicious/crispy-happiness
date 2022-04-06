@@ -9,5 +9,7 @@
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
     "incremental": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
 }
