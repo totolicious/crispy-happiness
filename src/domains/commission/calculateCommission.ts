@@ -79,7 +79,7 @@ export const calculateCommission = async ({
       };
     }
 
-    const minCommission: number = Math.min.apply(Math, validCommissionAmmounts);
+    const minCommission: number = Math.min(...validCommissionAmmounts);
 
     return {
       error: null,

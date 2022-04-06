@@ -15,6 +15,7 @@
   },
   "rules": {
     "import/prefer-default-export": "off",
-    "import/no-cycle": "off"
+    "import/no-cycle": "off",
+    "no-void": "off"
   }
 }
