@@ -1,8 +1,8 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
-import { Client, Transaction } from '../../domains';
 import {Logger} from "../logger";
 import {DataSourceOptions} from "typeorm/data-source/DataSourceOptions";
+import { getAllEntities } from "./getAllEntities";
 
 export interface InitDBConfig {
     logger: Logger;
@@ -15,7 +15,7 @@ export const initDb = async ({
 }: InitDBConfig): Promise<DataSource> => {
     const AppDataSource = new DataSource({
         ...dataSourceOptions,
-        entities: [Client, Transaction],
+        entities: getAllEntities(),
         synchronize: false,
     });
 
