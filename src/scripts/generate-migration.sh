@@ -1,0 +1,1 @@
+npx typeorm-ts-node-commonjs migration:generate -d src/infrastructure/db/cli-data-source.ts "src/infrastructure/db/migrations/$1"

@@ -6,10 +6,15 @@
   "author": "Gabriel Totoliciu <gabriel@totoliciu.ro>",
   "license": "MIT",
   "scripts": {
-    "start-dev": "NODE_ENV=development ts-node-dev --clear --respawn --project ./tsconfig.json ./src/app.ts"
+    "init-project": "chmod +x ./src/scripts/*.sh",
+    "start-dev": "yarn migrate && ./src/scripts/start-dev.sh",
+    "migrate": "./src/scripts/migrate.sh",
+    "generate-migration": "./src/scripts/generate-migration.sh",
+    "add-client": "ts-node src/scripts/add-client.ts"
   },
   "devDependencies": {
     "@tsconfig/node16": "^1.0.2",
+    "ts-node": "^10.7.0",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.6.3"
   },

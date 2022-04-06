@@ -1,0 +1,1 @@
+ts-node node_modules/typeorm/cli migration:run -d src/infrastructure/db/cli-data-source.ts
