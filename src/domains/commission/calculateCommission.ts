@@ -14,7 +14,8 @@ export type CalculateCommissionReturnType = {
     commission: Commission;
 }
 
-    export const calculateCommission = async ({
+
+export const calculateCommission = async ({
         dataSource,
         transaction,
         currencyConvertor,
@@ -41,11 +42,22 @@ export type CalculateCommissionReturnType = {
         currency: transaction.currency,
     });
 
-    const eurAmount = await currencyConvertor.convertToEur({
-       currency: commission.currency,
-       amount: commission.amount,
-       date: transaction.date,
-    });
+    let eurAmount: number;
+    try {
+        eurAmount = await currencyConvertor.convertToEur({
+           currency: commission.currency,
+           amount: commission.amount,
+           date: transaction.date,
+        });
+    } catch (e) {
+        return({
+            error: {
+                name: 'ConversionError',
+                message: (e as Error).message
+            },
+            commission: null
+        });
+    }
 
     const eurCommission = new Commission({
         amount: eurAmount,

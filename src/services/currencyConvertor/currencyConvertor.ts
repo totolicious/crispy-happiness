@@ -33,7 +33,7 @@ export class CurrencyConvertor {
         const response = await fetch(`${this.endpointBaseURL}/${date}`);
 
         // ensure the endpoint returns expected data
-        const validatedResponse = await validateEndpointResponse(response);
+        const validatedResponse = await validateEndpointResponse(await response.json());
 
         const rates = validatedResponse.rates;
 
