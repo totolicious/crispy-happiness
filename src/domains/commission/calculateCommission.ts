@@ -37,7 +37,7 @@ export const calculateCommission = async ({
     }
 
     // default rule commission calculation
-    const commission = new Commission({
+    const defaultPercentageCommission = new Commission({
         amount: transaction.amount * 0.5/100,
         currency: transaction.currency,
     });
@@ -45,8 +45,8 @@ export const calculateCommission = async ({
     let eurAmount: number;
     try {
         eurAmount = await currencyConvertor.convertToEur({
-           currency: commission.currency,
-           amount: commission.amount,
+           currency: defaultPercentageCommission.currency,
+           amount: defaultPercentageCommission.amount,
            date: transaction.date,
         });
     } catch (e) {
