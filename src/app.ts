@@ -13,11 +13,11 @@ const init = async () => {
     const logger = new Logger(config.logger);
 
     // connect to the database
-    await initDb({ logger, dataSourceOptions: config.db });
+    const dataSource = await initDb({ logger, dataSourceOptions: config.db });
 
     // create the web server, add the endpoints, start the server
     const webServer = new WebServer({ config: config.webServer, logger });
-    webServer.addRouter(getTransactionsRouter({ logger }));
+    webServer.addRouter(getTransactionsRouter({ logger, dataSource }));
     await webServer.start();
 }
 
