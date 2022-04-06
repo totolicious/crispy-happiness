@@ -1,8 +1,8 @@
 import {Logger, WebServer} from "./infrastructure";
 import {config} from "./config";
-import { getTransactionsRouter } from "./infrastructure/endpoints/transactions/commission/commission";
+import { getTransactionsRouter } from "./infrastructure";
 import {addYupMethods} from "./utils";
-import {initDb} from "./infrastructure/db/dataSource";
+import {initDb} from "./infrastructure";
 
 
 const init = async () => {
