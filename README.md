@@ -27,7 +27,7 @@ Or you could just type
 ```
 yarn add-client 42 0.05
 ```
-This will add the client with id 42 and their preferred commission of 0.05 eur
+This will add the client with id 42 and their preferred commission of 0.05 eur.
 Run `yarn add-client --help` for usage info. Arguments are optional
 
 # Some thoughts:
