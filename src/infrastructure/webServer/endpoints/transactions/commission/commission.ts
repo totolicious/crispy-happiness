@@ -1,7 +1,7 @@
 import {Router} from "express";
-import { Logger } from "../../../logger";
+import { Logger } from "../../../../logger";
 import {validateTransactionInput} from "./validateTransactionInput";
-import {Client} from "../../../../domains";
+import {Client} from "../../../../../domains";
 import {DataSource} from "typeorm";
 
 export interface TransactionsRouterConfig {
@@ -22,9 +22,6 @@ export const getTransactionsRouter = ({ logger, dataSource }: TransactionsRouter
           res.send();
           return;
       }
-
-      // TODO: trigger error intentionally
-      (process.env as any)();
 
       const client = await dataSource.getRepository(Client)
           .findOneBy({ id: transaction.client_id });
