@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import {isValidStringDate} from "./methods";
+import {isValidStringDate} from "./isValidStringDate";
 
 export const addYupMethods = () => {
     Yup.addMethod<Yup.StringSchema>(
