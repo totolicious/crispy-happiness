@@ -2,7 +2,7 @@ import { DataSource } from "typeorm";
 import { AsyncError } from "../../utils";
 import { Client } from "../client";
 import { Transaction } from "../transaction";
-import { Commission } from ".";
+import { Commission } from "./Commission";
 import { Currency } from "../currency";
 import { CurrencyConvertor } from "../../services";
 import { config } from "../../config";

@@ -63,3 +63,4 @@ yarn migrate
 * Replace string currency types with the Currency enum
 * Add tsDoc comments
 * Left a lot of TODO comments. It could definitely be improved in many ways, but I hope you get an idea :)
+* fix circular references. About 5 left. Related to types not being in separate files
