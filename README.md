@@ -39,6 +39,7 @@ If we're interested to also handle cases for negative amount transactions (refun
 then I would return 0 as the commission
 * Haven't thought about CI and a production config, sorry I did this in a couple of hours
 * Maybe not all files are placed in their ideal directory. I'd assume this could get ironed out after working more with this directory structure
+* For simplicity, all dates are used as strings :D
 
 #Dev notes:
 
@@ -59,3 +60,4 @@ yarn migrate
 * Move credentials to .env file instead of config.ts
 * Set up tsconfig base paths for config, domains, infrastructure, utils, etc
 * Create typeorm logger based on the infrastructure/logger
+* Memoize conversion rate api responses based on dates
