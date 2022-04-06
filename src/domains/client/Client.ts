@@ -1,10 +1,10 @@
-import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Client {
-    @PrimaryGeneratedColumn()
-    public id!: number;
+  @PrimaryGeneratedColumn()
+  public id!: number;
 
-    @Column({ nullable: true, type: 'float' })
-    public preferentialComissionEur?: number;
+  @Column({ nullable: true, type: "float" })
+  public preferentialComissionEur?: number;
 }

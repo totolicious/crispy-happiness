@@ -1,37 +1,42 @@
-//TODO: this class would be a good place to create a connector for loggers such as Sentry or Winston
+// TODO: this class would be a good place to create a connector for loggers such as Sentry or Winston
 
-import { Logger as TSLogger } from 'tslog';
+import { Logger as TSLogger } from "tslog";
 
 export interface LoggerConfig {
-    debugEnabled: boolean,
-    displayDateTime: boolean,
-    displayFilePath: boolean,
+  debugEnabled: boolean;
+  displayDateTime: boolean;
+  displayFilePath: boolean;
 }
 
 export class Logger {
-    private readonly debugEnabled: boolean;
-    private readonly logger: TSLogger;
+  private readonly debugEnabled: boolean;
 
-    constructor ({debugEnabled, displayDateTime, displayFilePath }: LoggerConfig) {
-        this.debugEnabled = debugEnabled;
-        this.logger = new TSLogger({
-            displayDateTime,
-            displayFilePath: displayFilePath ? 'hideNodeModulesOnly': 'hidden',
-            displayFunctionName: false,
-        });
-    }
+  private readonly logger: TSLogger;
 
-    public info(...params: any[]) {
-        this.logger.info(...params);
-    }
+  constructor({
+    debugEnabled,
+    displayDateTime,
+    displayFilePath,
+  }: LoggerConfig) {
+    this.debugEnabled = debugEnabled;
+    this.logger = new TSLogger({
+      displayDateTime,
+      displayFilePath: displayFilePath ? "hideNodeModulesOnly" : "hidden",
+      displayFunctionName: false,
+    });
+  }
 
-    public error(...params: any[]) {
-        this.logger.error(...params);
-    }
+  public info(...params: any[]) {
+    this.logger.info(...params);
+  }
 
-    public debug(...params: any) {
-        if (this.debugEnabled) {
-            this.logger.debug(...params);
-        }
+  public error(...params: any[]) {
+    this.logger.error(...params);
+  }
+
+  public debug(...params: any) {
+    if (this.debugEnabled) {
+      this.logger.debug(...params);
     }
+  }
 }

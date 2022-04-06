@@ -1,12 +1,10 @@
 export class Commission {
-    public readonly amount: number;
-    public readonly currency: string;
+  public readonly amount: number;
 
-    constructor({ amount, currency }: {
-        amount: number;
-        currency: string;
-    }) {
-        this.amount = amount;
-        this.currency = currency;
-    }
+  public readonly currency: string;
+
+  constructor({ amount, currency }: { amount: number; currency: string }) {
+    this.amount = amount;
+    this.currency = currency;
+  }
 }

@@ -1,2 +1,3 @@
-import { Client, Transaction } from '../../domains';
+import { Client, Transaction } from "../../domains";
+
 export const getAllEntities = () => [Client, Transaction];

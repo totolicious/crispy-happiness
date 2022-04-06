@@ -1,2 +1,2 @@
-export * from './calculateCommission';
-export * from './Commission';
+export * from "./calculateCommission";
+export * from "./Commission";

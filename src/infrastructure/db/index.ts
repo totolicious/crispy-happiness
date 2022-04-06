@@ -1,2 +1,2 @@
-export * from './initDb';
-export * from './getAllEntities';
+export * from "./initDb";
+export * from "./getAllEntities";

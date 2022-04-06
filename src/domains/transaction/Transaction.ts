@@ -1,20 +1,20 @@
-import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
-import {Client} from "..";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Client } from "..";
 
 @Entity()
 export class Transaction {
-    @PrimaryGeneratedColumn()
-    public id!: number;
+  @PrimaryGeneratedColumn()
+  public id!: number;
 
-    @Column()
-    public date!: string;
+  @Column()
+  public date!: string;
 
-    @Column("float")
-    public amount!: number;
+  @Column("float")
+  public amount!: number;
 
-    @Column()
-    public currency!: string;
+  @Column()
+  public currency!: string;
 
-    @ManyToOne(() => Client)
-    public clientId!: number;
+  @ManyToOne(() => Client)
+  public clientId!: number;
 }
