@@ -61,3 +61,4 @@ yarn migrate
 * Set up tsconfig base paths for config, domains, infrastructure, utils, etc
 * Create typeorm logger based on the infrastructure/logger
 * Memoize conversion rate api responses based on dates
+* Replace string currency types with the Currency enum 
