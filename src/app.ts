@@ -2,6 +2,7 @@ import {Logger, WebServer} from "./infrastructure";
 import {config} from "./config";
 import { getTransactionsRouter } from "./infrastructure/endpoints/transactions/commission/commission";
 import {addYupMethods} from "./utils";
+import {initDb} from "./infrastructure/db/dataSource";
 
 
 const init = async () => {
@@ -11,15 +12,13 @@ const init = async () => {
     // initialize application logger
     const logger = new Logger(config.logger);
 
-    // create the web server
+    // connect to the database
+    await initDb({ logger, dataSourceOptions: config.db });
+
+    // create the web server, add the endpoints, start the server
     const webServer = new WebServer({ config: config.webServer, logger });
-
-    // add endpoints to web server
     webServer.addRouter(getTransactionsRouter({ logger }));
-
-    // start the web server
     await webServer.start();
 }
 
 void init();
-
