@@ -46,7 +46,7 @@ export const getTransactionsRouter = ({ logger, dataSource, currencyConvertor }:
           return;
       }
 
-      // store the transaction
+      // TODO: store the transaction in EUR
 
 
       res.status(200);
