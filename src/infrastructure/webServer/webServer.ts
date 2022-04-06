@@ -14,6 +14,8 @@ export class WebServer {
         this.server = express();
         this.config = config;
         this.logger = logger;
+
+        this.server.use(express.json());
     }
 
     /**
@@ -32,5 +34,8 @@ export class WebServer {
             });
         })
     }
-}
 
+    public addRouter(router: express.Router) {
+        this.server.use(router);
+    }
+}
