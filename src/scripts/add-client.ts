@@ -1,5 +1,4 @@
 import {AppDataSource} from "../infrastructure/db/cli-data-source";
-import {Client} from "../domains";
 import { Logger } from "../infrastructure";
 import * as Yup from "yup";
 
@@ -20,8 +19,6 @@ comission-percent  float meaning the preferred commission for this client or "a"
         comissionPercent: Yup.number().moreThan(0).max(100),
     });
 
-    console.log(process.argv);
-
     const inputId = process.argv[2] === 'a' ? undefined : process.argv[2];
     const inputCommissionPercent = process.argv[3] === 'a' ? undefined : process.argv[3];
 
@@ -32,16 +29,34 @@ comission-percent  float meaning the preferred commission for this client or "a"
         });
 
         const connection = await AppDataSource.initialize();
-        const result = await connection.createQueryBuilder().insert()
-            .into(Client)
-            .values([
-                { id, commissionPercent }
-            ])
-            .execute();
 
-        logger.info(`Client '${result.raw.id}' was added with preferred commission '${result.raw.commissionPercent}'`);
+        let result: [ { id: number } ];
 
-        // Ideally, i would have inserted it like this, but TypeORM doesn't let me set the id manually
+        // typeorm doesn't let me insert with preferred id, so I had to find nasty a workaround
+        if (id && commissionPercent) {
+            result = await connection.query('INSERT INTO "client"("id", "commissionPercent") VALUES ($1, $2) RETURNING "id"', [id, commissionPercent]);
+        } else if (id) {
+            result = await connection.query('INSERT INTO "client"("id") VALUES ($1) RETURNING "id"', [id]);
+        } else if (commissionPercent) {
+            result = await connection.query('INSERT INTO "client"("commissionPercent") VALUES ($1) RETURNING "id"', [commissionPercent]);
+        } else {
+            result = await connection.query('INSERT INTO "client"("commissionPercent") VALUES(NULL) RETURNING "id"');
+        }
+
+        logger.info(`Client '${result[0].id}' was added with preferred commission '${commissionPercent}'`);
+
+        // initially tried this
+        // const connection = await AppDataSource.initialize();
+        // const result = await connection.createQueryBuilder().insert()
+        //     .into(Client)
+        //     .values([
+        //         { id, commissionPercent }
+        //     ])
+        //     .execute();
+        //
+        // logger.info(`Client '${result.raw.id}' was added with preferred commission '${result.raw.commissionPercent}'`);
+
+        // then this
         // const client = new Client();
         // if (id) {
         //     client.id = id;
