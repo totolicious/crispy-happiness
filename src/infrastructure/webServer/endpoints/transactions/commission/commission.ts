@@ -4,6 +4,7 @@ import {validateTransactionInput} from "./validateTransactionInput";
 import {DataSource} from "typeorm";
 import {calculateCommission} from "../../../../../domains";
 import {CurrencyConvertor} from "../../../../../services";
+import {AsyncError} from "../../../../../utils";
 
 export interface TransactionsRouterConfig {
     logger: Logger;
@@ -16,9 +17,9 @@ export const getTransactionsRouter = ({ logger, dataSource, currencyConvertor }:
 
   router.post('/transactions/commission', async (req, res) => {
       // TODO: could be moved somewhere more generic
-      const sendBadInputResponse = (error: Error) => {
+      const sendBadInputResponse = (error: AsyncError) => {
           logger.debug(error);
-          res.status(400);
+          res.status(error.name === 'ValidationError' ? 400: 500);
           res.json({ error, commission: null });
           res.send();
       }
@@ -44,6 +45,9 @@ export const getTransactionsRouter = ({ logger, dataSource, currencyConvertor }:
           sendBadInputResponse(response.error);
           return;
       }
+
+      // store the transaction
+
 
       res.status(200);
       res.json({ error: null, commission: response.commission })

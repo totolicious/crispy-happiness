@@ -20,12 +20,12 @@ comission-percent  float meaning the preferred commission for this client or "a"
     });
 
     const inputId = process.argv[2] === 'a' ? undefined : process.argv[2];
-    const inputCommissionPercent = process.argv[3] === 'a' ? undefined : process.argv[3];
+    const inputpreferentialComissionEur = process.argv[3] === 'a' ? undefined : process.argv[3];
 
     try {
-        const { id, commissionPercent } = await schema.validate({
+        const { id, preferentialComissionEur } = await schema.validate({
             id: inputId,
-            commissionPercent: inputCommissionPercent
+            preferentialComissionEur: inputpreferentialComissionEur
         });
 
         const connection = await AppDataSource.initialize();
@@ -33,39 +33,39 @@ comission-percent  float meaning the preferred commission for this client or "a"
         let result: [ { id: number } ];
 
         // typeorm doesn't let me insert with preferred id, so I had to find nasty a workaround
-        if (id && commissionPercent) {
-            result = await connection.query('INSERT INTO "client"("id", "commissionPercent") VALUES ($1, $2) RETURNING "id"', [id, commissionPercent]);
+        if (id && preferentialComissionEur) {
+            result = await connection.query('INSERT INTO "client"("id", "preferentialComissionEur") VALUES ($1, $2) RETURNING "id"', [id, preferentialComissionEur]);
         } else if (id) {
             result = await connection.query('INSERT INTO "client"("id") VALUES ($1) RETURNING "id"', [id]);
-        } else if (commissionPercent) {
-            result = await connection.query('INSERT INTO "client"("commissionPercent") VALUES ($1) RETURNING "id"', [commissionPercent]);
+        } else if (preferentialComissionEur) {
+            result = await connection.query('INSERT INTO "client"("preferentialComissionEur") VALUES ($1) RETURNING "id"', [preferentialComissionEur]);
         } else {
-            result = await connection.query('INSERT INTO "client"("commissionPercent") VALUES(NULL) RETURNING "id"');
+            result = await connection.query('INSERT INTO "client"("preferentialComissionEur") VALUES(NULL) RETURNING "id"');
         }
 
-        logger.info(`Client '${result[0].id}' was added with preferred commission '${commissionPercent}'`);
+        logger.info(`Client '${result[0].id}' was added with preferred commission '${preferentialComissionEur}'`);
 
         // initially tried this
         // const connection = await AppDataSource.initialize();
         // const result = await connection.createQueryBuilder().insert()
         //     .into(Client)
         //     .values([
-        //         { id, commissionPercent }
+        //         { id, preferentialComissionEur }
         //     ])
         //     .execute();
         //
-        // logger.info(`Client '${result.raw.id}' was added with preferred commission '${result.raw.commissionPercent}'`);
+        // logger.info(`Client '${result.raw.id}' was added with preferred commission '${result.raw.preferentialComissionEur}'`);
 
         // then this
         // const client = new Client();
         // if (id) {
         //     client.id = id;
         // }
-        // client.commissionPercent = commissionPercent;
+        // client.preferentialComissionEur = preferentialComissionEur;
         //
         // const result = await AppDataSource.getRepository(Client).save(client);
         //
-        // logger.info(`Client '${result.id}' was added with preferred commission '${result.commissionPercent}'`);
+        // logger.info(`Client '${result.id}' was added with preferred commission '${result.preferentialComissionEur}'`);
 
     } catch (e) {
         logger.error(e);

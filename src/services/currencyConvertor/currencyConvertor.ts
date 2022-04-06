@@ -20,6 +20,8 @@ export class CurrencyConvertor {
         amount: number;
         date: string;
     }): Promise<number> => {
+        // TODO: validate the date
+
         // no need to convert from EUR to EUR
         if (currency === Currency.EUR) {
             return amount;

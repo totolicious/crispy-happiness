@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import {ValidationError} from "../../../../../utils";
+import {AsyncError} from "../../../../../utils";
 import {pick} from "lodash";
 import {Transaction} from "../../../../../domains";
 
@@ -11,7 +11,7 @@ declare module "yup" {
 }
 
 type ValidateTransactionInputReturnType = {
-    error: ValidationError;
+    error: AsyncError;
     transaction: null
 } | {
     error: null
@@ -39,7 +39,7 @@ export const validateTransactionInput = async (data: any): Promise<ValidateTrans
         validatedTransaction = await schema.validate(data);
     } catch (e) {
         return {
-            error: pick(e, ['name', 'message']) as ValidationError,
+            error: pick(e, ['name', 'message']) as AsyncError,
             transaction: null
         }
     }

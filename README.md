@@ -34,12 +34,11 @@ Run `yarn add-client --help` for usage info. Arguments are optional
 * I decided to do this from scratch so it's a bit harder to build :)
 * In the request example, the "amount" property seems to be a string. I made the validator to ask for a number. 
 I hope that's ok. (if there's a solid reason for it to be a string, I'm curious to know).
-* I assumed the "amount" property is always positive.
-If we're interested to also handle cases for negative amount transactions (refunds),
-then I would return 0 as the commission
-* Haven't thought about CI and a production config, sorry I did this in a couple of hours
+* I assumed the "amount" property is always positive. Thought about handling negative amount transactions (refunds)
+but in the interest of time I didn't :)
+* Haven't thought about CI and a production config, sorry
 * Maybe not all files are placed in their ideal directory. I'd assume this could get ironed out after working more with this directory structure
-* For simplicity, all dates are used as strings :D
+* For simplicity, all dates are used as strings :D. Helps with not caring about timezones and the problems that come with dates. Had too keep it simple
 
 #Dev notes:
 
@@ -61,4 +60,5 @@ yarn migrate
 * Set up tsconfig base paths for config, domains, infrastructure, utils, etc
 * Create typeorm logger based on the infrastructure/logger
 * Memoize conversion rate api responses based on dates
-* Replace string currency types with the Currency enum 
+* Replace string currency types with the Currency enum
+* Add tsDoc comments

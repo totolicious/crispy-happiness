@@ -6,5 +6,5 @@ export class Client {
     public id!: number;
 
     @Column({ nullable: true, type: 'float' })
-    public commissionPercent?: number;
+    public preferentialComissionEur?: number;
 }

@@ -1,6 +1,7 @@
 import {LoggerConfig, WebServerConfig} from "../infrastructure";
 import {DataSourceOptions} from "typeorm/data-source/DataSourceOptions";
 import {CurrencyConvertorConfig} from "../services";
+import {CommissionConfig} from "../domains/commission/types";
 
 const isDev = process.env.NODE_ENV !== 'production';
 
@@ -9,6 +10,7 @@ export const config: {
     webServer: WebServerConfig,
     db: DataSourceOptions,
     currencyConvertor: CurrencyConvertorConfig,
+    commissions: CommissionConfig,
 } = {
     logger: {
         debugEnabled: isDev,
@@ -29,5 +31,14 @@ export const config: {
     },
     currencyConvertor: {
         endpointBaseURL: 'https://api.exchangerate.host/'
+    },
+    commissions: {
+        defaultPercentage: {
+            percentage: 0.5,
+            minimumAllowedComissionInEur: 0.05,
+        },
+        transactionTurnoverDiscount: {
+            monthlyAmountEurThreshold: 1000,
+        },
     },
 }
