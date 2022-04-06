@@ -3,7 +3,7 @@ This is a test
 
 #Prerequisites:
 I developed this using
-node 14.16
+node 14.17
 yarn 1.22.17
 npx 6.14.11
 docker-compose 1.29.0

@@ -11,5 +11,5 @@
     "incremental": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
-  },
+  }
 }
