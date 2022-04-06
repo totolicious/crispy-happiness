@@ -12,7 +12,6 @@ export const getTransactionsRouter = ({}: TransactionsRouterConfig) => {
 
   router.post('/transactions/commission', async (req, res) => {
       const transaction = req.body;
-
       const { error } = await validateTransactionInput(transaction);
 
       if (error) {
@@ -21,6 +20,10 @@ export const getTransactionsRouter = ({}: TransactionsRouterConfig) => {
           res.send();
           return;
       }
+
+      res.status(200);
+      res.json({})
+      res.send();
   });
 
   return router;
