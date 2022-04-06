@@ -1,5 +1,6 @@
 import {LoggerConfig, WebServerConfig} from "../infrastructure";
 import {DataSourceOptions} from "typeorm/data-source/DataSourceOptions";
+import {CurrencyConvertorConfig} from "../services";
 
 const isDev = process.env.NODE_ENV !== 'production';
 
@@ -7,6 +8,7 @@ export const config: {
     logger: LoggerConfig,
     webServer: WebServerConfig,
     db: DataSourceOptions,
+    currencyConvertor: CurrencyConvertorConfig,
 } = {
     logger: {
         debugEnabled: isDev,
@@ -24,5 +26,8 @@ export const config: {
         password: 'postgres',
         database: 'crispy_happiness',
         logging: isDev,
-    }
+    },
+    currencyConvertor: {
+        endpointBaseURL: 'https://api.exchangerate.host/'
+    },
 }
