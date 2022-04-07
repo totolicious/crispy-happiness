@@ -23,8 +23,6 @@ yarn start-dev
 # Adding clients
 We need to add at least one client so that we can calculate transactions.
 
-Run the server at least once before beginning this section.
-
 How to add clients:
 ```
 yarn add-client 42 0.05

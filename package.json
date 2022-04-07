@@ -6,7 +6,7 @@
   "author": "Gabriel Totoliciu <gabriel@totoliciu.ro>",
   "license": "MIT",
   "scripts": {
-    "init-project": "chmod +x ./src/scripts/*.sh",
+    "init-project": "chmod +x ./src/scripts/*.sh; yarn migrate",
     "start-dev": "yarn migrate && ./src/scripts/start-dev.sh",
     "migrate": "./src/scripts/migrate.sh",
     "generate-migration": "./src/scripts/generate-migration.sh",
