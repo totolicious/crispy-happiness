@@ -21,9 +21,11 @@ yarn start-dev
 ```
 
 # Adding clients
+We need to add at least one client so that we can calculate transactions.
+
 Run the server at least once before beginning this section.
-I don't have an admin GUI for you, but you could connect to the db (see docker-compose.yml for credentials) and add a client.
-Or you could just type
+
+How to add clients:
 ```
 yarn add-client 42 0.05
 ```
