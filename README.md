@@ -30,6 +30,9 @@ yarn add-client 42 0.05
 This will add the client with id 42 and their preferred commission of 0.05 eur.
 Run `yarn add-client --help` for usage info. Arguments are optional
 
+# Example Requests
+If you use [Insomnia](https://insomnia.rest/) (REST client), you can find a request collection in the insomnia directory. 
+
 # Some thoughts
 * I decided to do this from scratch so it's a bit harder to build :)
 * In the request example, the "amount" property seems to be a string. I made the validator to ask for a number. 
