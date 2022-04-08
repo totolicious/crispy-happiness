@@ -1,4 +1,5 @@
 import express, { Express } from "express";
+import http from "http";
 import { Logger } from "../logger";
 
 export interface WebServerConfig {
@@ -7,6 +8,8 @@ export interface WebServerConfig {
 
 export class WebServer {
   private server: Express;
+
+  private httpServer?: http.Server;
 
   private config: WebServerConfig;
 
@@ -20,12 +23,9 @@ export class WebServer {
     this.server.use(express.json());
   }
 
-  /**
-   * Attempts to start the web server and waits for the web server successfully start or fail starting
-   */
   public async start(): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.server
+      this.httpServer = this.server
         .listen(this.config.port, () => {
           this.logger.debug(
             `Starting web server on port '${this.config.port}'`
@@ -42,6 +42,12 @@ export class WebServer {
           resolve();
         });
     });
+  }
+
+  public async stop(): Promise<void> {
+    if (this.httpServer) {
+      this.httpServer.close();
+    }
   }
 
   public addRouter(router: express.Router) {

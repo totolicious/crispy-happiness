@@ -25,7 +25,7 @@ export const config: {
   db: {
     type: "postgres",
     host: "localhost",
-    port: 5439,
+    port: isTest ? 5440: 5439,
     username: "postgres",
     password: "postgres",
     database: isTest ? "crispy_happiness_test" : "crispy_happiness",
