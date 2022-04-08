@@ -7,9 +7,9 @@ import { Currency } from "../currency";
 import { CurrencyConvertor } from "../../services";
 import { config } from "../../config";
 import {
-  transactionTurnoverDiscountRule,
-  clientPreferentialCommissionRule,
-  defaultPercentageRule,
+  getTransactionTurnoverThresholdCommission,
+  getClientPreferentialCommission,
+  getDefaultPercentageCommission,
 } from "./rules";
 
 export type CalculateCommissionReturnType =
@@ -49,15 +49,15 @@ export const calculateCommission = async ({
     // calculate commissions in eur based on all available rules
     // all rules must be async and must return EUR amounts
     const commissionAmounts: (number | null)[] = await Promise.all([
-      defaultPercentageRule({
+      getDefaultPercentageCommission({
         ruleConfig: config.commissions.defaultPercentage,
         transaction,
         currencyConvertor,
       }),
-      clientPreferentialCommissionRule({
+      getClientPreferentialCommission({
         client,
       }),
-      transactionTurnoverDiscountRule({
+      getTransactionTurnoverThresholdCommission({
         client,
         dataSource,
         ruleConfig: config.commissions.transactionTurnoverDiscount,

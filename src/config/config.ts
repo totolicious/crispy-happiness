@@ -5,6 +5,7 @@ import { CommissionConfig } from "../domains/commission/types";
 import { CurrencyConvertorConfig } from "../services/currencyConvertor/types";
 
 const isDev = process.env.NODE_ENV !== "production";
+const isTest = process.env.NODE_ENV === "test";
 
 export const config: {
   logger: LoggerConfig;
@@ -27,7 +28,7 @@ export const config: {
     port: 5439,
     username: "postgres",
     password: "postgres",
-    database: "crispy_happiness",
+    database: isTest ? "crispy_happiness_test" : "crispy_happiness",
     logging: isDev,
   },
   currencyConvertor: {
@@ -40,7 +41,7 @@ export const config: {
     },
     transactionTurnoverDiscount: {
       monthlyAmountEurThreshold: 1000,
-      commissionInEur: 0.3,
+      commissionInEurAfterThreshold: 0.3,
     },
   },
 };

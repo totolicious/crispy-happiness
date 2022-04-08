@@ -1,3 +1,3 @@
-export * from "./defaultPercentageRule";
-export * from "./clientPreferentialCommissionRule";
-export * from "./transactionTurnoverDiscountRule";
+export * from "./getDefaultPercentageCommission";
+export * from "./getClientPreferentialCommission";
+export * from "./getTransactionTurnoverThresholdCommission";

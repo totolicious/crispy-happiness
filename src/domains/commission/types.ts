@@ -5,6 +5,6 @@ export interface CommissionConfig {
   };
   transactionTurnoverDiscount: {
     monthlyAmountEurThreshold: number;
-    commissionInEur: number;
+    commissionInEurAfterThreshold: number;
   };
 }
